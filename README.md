@@ -2,6 +2,8 @@
 
     - create-react-app
     - configured tailwind
+    - Header
+    - Login
 
 # Features
 

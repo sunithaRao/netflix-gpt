@@ -1,11 +1,12 @@
-import "./App.css";
+import React from "react";
+import Body from "./components/Body";
 
-function App() {
+const App = () => {
   return (
-    <div className="text-3xl font-bold text-green-800">
-      Namasthe - Netflix-gpt
+    <div>
+      <Body></Body>
     </div>
   );
-}
+};
 
 export default App;
