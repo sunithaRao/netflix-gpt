@@ -15,6 +15,7 @@
     - Implimented Signout flow
     - Update profile
     - Fetch Movie 
+    - Bug Fix: dispaly
 
 
 # Features

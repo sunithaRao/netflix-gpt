@@ -7,25 +7,34 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "./../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { useNavigate } from "react-router-dom";
+import { USER_AVATAR, BACKGROUND_IMG } from "../utils/constants";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const fullName = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
-  const name = useRef(null);
 
   const handleButtonClick = () => {
-    console.log(email.current.value);
-    console.log(password.current.value);
+    !isSignInForm ? console.log("SignUp flow") : console.log("Signin flow");
 
-    const message = checkValidate(email.current.value, password.current.value);
+    const fullName_value = isSignInForm ? "" : fullName.current.value;
+
+    const message = checkValidate(
+      fullName_value,
+      email.current.value,
+      password.current.value,
+      isSignInForm
+    );
+
     setErrorMessage(message);
     if (message) return;
 
@@ -35,14 +44,14 @@ const Login = () => {
         auth,
         email.current.value,
         password.current.value,
-        name.current.value
+        fullName.current.value
       )
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
           updateProfile(user, {
-            displayName: name.current.value,
-            photoURL: "https://avatars.githubusercontent.com/u/16305003?v=4",
+            displayName: fullName.current.value,
+            photoURL: USER_AVATAR,
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -54,7 +63,6 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              navigate("/browse");
             })
             .catch((error) => {
               // An error occurred
@@ -62,7 +70,6 @@ const Login = () => {
             });
 
           console.log("Signup User ", user);
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -95,10 +102,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img
-          alt="logo"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/03ad76d1-e184-4d99-ae7d-708672fa1ac2/web/IN-en-20241111-TRIFECTA-perspective_149877ab-fcbd-4e4f-a885-8d6174a1ee81_large.jpg"
-        ></img>
+        <img alt="logo" src={BACKGROUND_IMG}></img>
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
@@ -109,7 +113,7 @@ const Login = () => {
         </h1>
         {!isSignInForm && (
           <input
-            ref={name}
+            ref={fullName}
             type="text"
             placeholder="Full Name"
             className="p-4 my-2 w-full bg-gray-700"
@@ -137,7 +141,7 @@ const Login = () => {
         </button>
         <p className="py-4 cursor-pointer" onClick={toggleSignInForm}>
           {isSignInForm
-            ? "New to Netflix? Sign Up Now"
+            ? "New to Netflix? Sign Up Now."
             : "Already Registered. Please Sign In."}
         </p>
       </form>
