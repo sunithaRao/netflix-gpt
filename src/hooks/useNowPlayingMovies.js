@@ -7,7 +7,7 @@ const useNowPlayingMovies = () => {
 
   const fetchMovie = async () => {
     const response = await fetch(
-      "https://www.omdbapi.com/?s=sun&apikey=7c4df11c"
+      "https://www.omdbapi.com/?s=indian&apikey=7c4df11c#"
     );
     console.log("response:", response);
     const finalResult = await response.json();
