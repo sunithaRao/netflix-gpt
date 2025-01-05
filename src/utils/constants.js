@@ -16,3 +16,12 @@ export const MAIN_MOVIE = {
   overview:
     "Exploring the unlikely rise of the beloved king of the Pride Lands, “Mufasa: The Lion King” enlists Rafiki to relay the legend of Mufasa to young lion cub Kiara. ",
 };
+
+export const SUPPORTED_LANGUAGES = [
+  { identifier: "en", name: "English" },
+  { identifier: "te", name: "Telugu" },
+  { identifier: "hi", name: "Hindi" },
+  { identifier: "tl", name: "Tamil" },
+  { identifier: "ml", name: "Malayalam" },
+  { identifier: "ka", name: "Kannada" },
+];

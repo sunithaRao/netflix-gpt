@@ -7,7 +7,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "./../utils/firebase";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { USER_AVATAR, BACKGROUND_IMG } from "../utils/constants";
@@ -15,7 +15,7 @@ import { USER_AVATAR, BACKGROUND_IMG } from "../utils/constants";
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
