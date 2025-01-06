@@ -25,3 +25,11 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "ml", name: "Malayalam" },
   { identifier: "ka", name: "Kannada" },
 ];
+
+export const GPT_RESULTS =
+  "Munna Bhai M.B.B.S., Welcome, 3 Idiots, Pyaar Ka Punchnama, Fukrey";
+
+export const OMDB_APIKEY = process.env.OMDB_APIKEY;
+export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY;
+
+export const OMDB_URL = "https://www.omdbapi.com/?t=";
